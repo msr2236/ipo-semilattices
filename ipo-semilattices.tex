@@ -40,14 +40,16 @@ involutive residuated lattices.
 % Hello
 
 \section{Background on involutive po-semigroups}
-A \emph{residuated po-semigroup} $(A,\le,\cdot,\ld,\rd)$ is a partially-ordered set $(A,\le)$ with an associative binary operation $\cdot$ and two \emph{residuals} that satisfy
+A \emph{residuated po-semigroup} $\m A=(A,\le,\cdot,\ld,\rd)$ is a partially-ordered set $(A,\le)$ with an associative binary operation $\cdot$ and two \emph{residuals} that satisfy
 $$
 \text{(res) }\quad xy\le z\iff x\le z\rd y\iff y\le x\ld z
 $$
 for all $x,y,z\in A$.
-The first equivalence ensures that $\cdot$ is order-preserving in the first argument ($x\le y\le yz\rd z\implies xz\le yz$), and likewise the second equivalence implies order-preservation in the second argument. A \emph{residuated lattice-ordered semigroup} $(A,\wedge,\vee,\cdot,\ld,\rd)$ (or \emph{r$\ell$-semigroup} for short) is a residuated po-semigroup for which the partial order is
-a lattice order. If $A$ contains a constant $1$ that is an identity element for $\cdot$ then $A$ is
-called a \emph{residuated lattice}.
+The first equivalence ensures that $\cdot$ is order-preserving in the first argument ($x\le y\le yz\rd z\implies xz\le yz$), and likewise the second equivalence implies order-preservation in the second argument. 
+If the signature is expanded to include a constant $1$ such that $x1=x=1x$ then
+$\m A$ is called a \emph{unital} rpo-semigroup or \emph{rpo-monoid}.
+A \emph{residuated lattice-ordered semigroup} $(A,\wedge,\vee,\cdot,\ld,\rd)$ (or \emph{r$\ell$-semigroup} for short) is a residuated po-semigroup for which the partial order is
+a lattice order. An $r\ell$-monoid is more commonly called a \emph{residuated lattice}.
 
 A \emph{residuated po-semilattice} is a residuated po-semigroup in which the multiplication is commutative and idempotent.
 
@@ -58,26 +60,58 @@ $$
 holds for all $x,y,z\in A$.
 It follows that the operation $\cdot$ is order-preserving in each argument, and that $\ln,\rn$ are both order-reversing. The axiom (ires) shows that $z/y=\rn(y\cdot \ln z$ and $x\ld z=\ln(\rn z\cdot x)$, but it is often convenient to use the equivalent formulation
 $$
-\text{(ires') }\quad xy\le z\iff y\cdot\ln z\le \ln x\iff \rn z\cdot x\le \rn y
+\text{(ir) }\quad xy\le z\iff y\cdot\ln z\le \ln x\iff \rn z\cdot x\le \rn y
 $$
 which says that the three variables can be rotated left (resp. right) cyclically as long as the left (resp. right) linear negation is applied to the variables that move across the inequality symbol.
 
 If $(A,\le)$ is a lattice, with join $\vee$ and meet $\wedge$, then $(A,\vee,\wedge,\cdot,\sim,-)$ is an \emph{involutive lattice-ordered semigroup} or \emph{i$\ell$-semigroup}, and in this case it follows that $x(y\vee z)=xy\vee xz$ and $(x\vee y)z=xz\vee yz$.
 
 An operation $\cdot$ is \emph{idempotent} if it satisfies $x\cdot x=x$ and
-\emph{commutative} if $xy=yx$.
+\emph{commutative} if $xy=yx$. The lemma below shows that idempotent ipo-semigroups can be axiomatized as partially ordered structures with an idempotent binary operation that satisfies (ir).
+
+
 \begin{lemma}\label{idem}
-If $\cdot$ is idempotent, then \textup{(ires)} or \textup{(ires')} imply $\ln\rn x=x=\rn\ln x$ and $x\le \ln y\iff y\le\rn x$.
+Assume $\m A=(A,\le,\cdot,\ln,\rn)$ is a structure such that $\cdot$ is idempotent. If $\m A$ satisfies \textup{(ir)} then $\ln\rn x=x=\rn\ln x$ and $x\le \ln y\iff y\le\rn x$, hence \textup{(ires)} holds.
 \end{lemma}
-\begin{proof} (to be inserted)
+\begin{proof} Assume (ir) and idempotence. From $x\cdot x=x\le x$ and (ir) it follows that $x\cdot \ln x\le \ln x$ and $-x\cdot x\le -x$. 
+Another application of (ir) to $\rn x\cdot\rn x\le \rn x$ produces $-x\cdot x\le x$ and similarly $x\cdot \ln x\le x$.
+
+Substituting $x\cdot\ln x$ for $x$ gives $-(x\cdot\ln x)\cdot(x\cdot\ln x)\le x\cdot\ln x\le x$, hence (ir) implies $(x\cdot\ln x)\cdot\ln x\le \ln\rn(x\cdot\ln x)$\quad$(*)$.
+
+The same substitution gives $(x\cdot\ln x)\cdot\ln(x\cdot\ln x)\le x\cdot\ln x\le \ln x$, hence by (ir) $x\cdot(x\cdot\ln x)\le x\cdot\ln x\le \ln x$. Applying (ir) two more times produces $(x\cdot\ln x)\cdot\ln\ln x\le \ln x$ and $\ln\ln x\cdot\ln\ln x\le \ln(x\cdot\ln x)$, which reduces to $\ln\ln x\le\ln (x\cdot\ln x)$.
+
+Now $\ln x\cdot y\le\ln x\cdot y$ implies $y\cdot\ln(\ln x\cdot y)\le\ln\ln x\le\ln(x\cdot\ln x)$, so (ir) gives $(x\cdot\ln x)\cdot y\le\ln x\cdot y$.
+Let $y=\ln((x\cdot\ln x)\cdot\ln x)$ in this expression to obtain
+$$
+(x\cdot\ln x)\cdot\ln((x\cdot\ln x)\cdot\ln x)\le\ln x\cdot\ln((x\cdot\ln x)\cdot\ln x)\le\ln(x\cdot\ln x)
+$$
+where the last inequality follows from (ir) applied to $(x\cdot\ln x)\cdot\ln x\le(x\cdot\ln x)\cdot\ln x$. Using (ir) again gives
+$$
+(x\cdot\ln x)\cdot(x\cdot\ln x)\le(x\cdot\ln x)\cdot\ln x\le\ln\rn(x\cdot\ln x).
+$$
+This time the last inequality is from $(*)$ above. From idempotence we obtain
+$(x\cdot\ln x)\le\ln\rn(x\cdot\ln x)$.
+
+Replacing $x$ by $\rn\ln x$ gives $\rn(\rn\ln x\cdot\ln\rn\ln x)\cdot\rn\ln x\le \rn\ln x$. Using (ir) again and the inequality $x\cdot\ln x\le\ln x$ proved earlier, shows that $\rn\ln x\cdot\ln x\le\rn\ln x\cdot\ln\rn\ln x\le \ln\rn\ln x$. A final application of (ir) and idempotence yields $\rn\ln x=\rn\ln x\cdot\rn\ln x\le x$.
+An analogous proof shows $\ln\rn x\le x$. 
+
+Next we prove $x\le\ln y\Rightarrow y\le\rn x$.
+Assume $x\le\rn y$, and recall from the beginning of the proof that $\rn x\cdot x\le x$. Then $\rn x\cdot x\le\rn y$ hence (ir) gives $x\cdot y\le x$.
+
+Since $x\cdot y\le x\cdot y$ it follows from two applications of (ir) that $y\cdot\ln(x\cdot y)\le\ln x$ and $\rn\ln x\cdot y\le \rn\ln(x\cdot y)$. Using the previously proved inequality $\rn\ln x\le x$ we get $\rn\ln x\cdot y\le x\cdot y\le x\le \rn y$, and (ir) once more gives $y=y\cdot y\le \ln x$. 
+
+The proof of the reverse implication is similar, making use of the inequality $\ln\rn x\le x$.
+
+Finally, since $\rn x\le \rn x$, it follows from the implication that $x\le \ln\rn x$, and the inequality $x\le\rn\ln x$ follows from the reverse implication.
 \end{proof}
-In a commutative idempotent ipo-semigroup there is another semilattice order, called the \emph{multiplicative order}, that is defined by
+
+In a \emph{commutative} idempotent ipo-semigroup there is another semilattice order, called the \emph{multiplicative order}, that is defined by
 $$x\sqsubseteq y \iff xy=x.$$ Therefore these algebras are called \emph{ipo-semilattices}.
 Note that commutativity implies $\ln x = \rn x$, hence by Lemma~\ref{idem} ipo-semilattices can be defined succinctly as partially ordered algebras $(A,\le,\cdot,-)$ such that $(A,\cdot)$ is a semilattice
 and
 $$\text{(cres) }\qquad xy\le z\iff x\le \rn(y\cdot\rn z)\text{ \ \  for all }x,y,z\in A$$
 or equivalently
-$$\text{(cres') }\qquad xy\le z\iff y\cdot\rn z\le \rn x\text{ \ \  for all }x,y,z\in A.$$
+$$\text{(cr) }\qquad xy\le z\iff y\cdot\rn z\le \rn x\text{ \ \  for all }x,y,z\in A.$$
 It then follows that $-$ is an order-reversing bijection and $-{-x}=x$, hence it is natural to define the operation $x+y=-(-x\cdot -y)$.
 
 The most prominent examples of ipo-semilattices are Boolean algebras. They arise as the case when the partial order $\le$ and the semilattice order $\sqsubseteq$ coincide. Usually Boolean algebras are defined with constant operations $0$ and $1$, but in this special case the terms $x\cdot -x$ and $-(x\cdot -x)$ are constant unary operations that fulfill the same role.
@@ -104,7 +138,7 @@ ipo-semilattices      &1&1&1&3&4&10&17&43&82&201&&&&&&\\
 \caption{Number of algebras up to isomorphism}\label{size-n}
 \end{table}
 
-The smallest i$\ell$-semilattice that is not a commutative idempotent involutive residuated lattice has $4$ elements. Its lattice and multiplicative order are show in Figure~\ref{cidil}.
+The smallest i$\ell$-semilattice that is not a commutative idempotent involutive residuated lattice has $4$ elements. Its lattice and multiplicative order are shown in Figure~\ref{cidil}.
 
 \tikzstyle{n} = [draw=none, rectangle, inner sep=0pt] %name style
 \tikzstyle{every node} = [draw, fill=white, circle, inner sep=0pt, minimum size=5pt]
@@ -167,6 +201,10 @@ The smallest ipo-semilattice that is not lattice-ordered has $8$ elements. Its p
 \end{center}
 \caption{The smallest ipo-semilattice that is not lattice-ordered.}\label{cidipo}
 \end{figure}
+
+The smallest unital ipo-semilattice that is not lattice-ordered has $10$ elements (Figure~\ref{}).
+
+
 
 \section{Structural properties of ipo-semilattices}
 It is an interesting project to adapt the arguments from \cite{JTV2020} to
@@ -244,7 +282,7 @@ hence each equivalence class has a bottom element even without the assumption of
 
 For an ipo-semilattice $A$, define the term $x+y=-(-x\cdot-y)$, so
 $1_x=x+-x$. Let $\mathbb B_x=\{a\in A\mid 0_x\sqsubseteq a\sqsubseteq 1_x\}$.
-By the previous lemma $y\in \mathbb B_x\iff 0_x=0_y$, and if $0_x=0_y$ then $x\sqsubseteq y\iff x\le y$.
+By the previous lemma $y\in \mathbb B_x\iff 0_x=0_y$, and if $0_x=0_y$ then $x\sqsubseteq y\iff x\le y$ (see Lemma~\ref{xxyy}(1)).
 
 The next lemma shows that ipo-semilattices have many interesting structural properties.
 
@@ -292,9 +330,9 @@ hence by idempotence $x\cdot -(x\cdot 1_y)\le xy$. Replacing $x$ by $x\cdot-(x\c
 $$
 x\cdot-(x\cdot 1_y)\cdot -(x\cdot-(x\cdot 1_y)\cdot 1_y)\le x\cdot-(x\cdot 1_y)y\le -x.
 $$
-where the last inequality follows from (cres'), idempotence and $y\le 1_y$.
+where the last inequality follows from (cr), idempotence and $y\le 1_y$.
 The term on the left is $x\cdot-(x\cdot 1_y)\cdot 1_{x1_y}=x\cdot-(x\cdot 1_y)$,
-hence it follows that $x\cdot-(x\cdot 1_y)\le -x$. Applying (cres') and idempotence once more, we get $x\le x\cdot 1$.
+hence it follows that $x\cdot-(x\cdot 1_y)\le -x$. Applying (cr) and idempotence once more, we get $x\le x\cdot 1$.
 
 (5) From $x\sqsubseteq y$ it follows that $1_y\le 1_x$ by (2) and (3). Multiplying by $1_x$ on both sides and using idempotence produces $1_x1_y\le 1_x$. The reverse inequality always holds by (4).
 
@@ -302,7 +340,7 @@ hence it follows that $x\cdot-(x\cdot 1_y)\le -x$. Applying (cres') and idempote
 $1_{xy}\le xy$ it suffices to show $-(xy)\le xy\cdot -(xy)$. By (4) $z\le z1_x=xz$ and $z\le z1_y=yz$,
 hence $-(xy)\le y\cdot -(xy)\le xy\cdot -(xy)$.
 
-(7) Assume $1_x\cdot y=0_x$. By (cres') we have $1_x\cdot 1_x\le -y$, hence $y\le 0_x$.
+(7) Assume $1_x\cdot y=0_x$. By (cr) we have $1_x\cdot 1_x\le -y$, hence $y\le 0_x$.
 It follows that $0_y\le y\le 0_x\le x,-x$. From $y\cdot -y\le -x$ we deduce $xy\le y$, and from
 $y\cdot -y\le x$ we $-x\cdot y\le y$. Now multiplying the assumption by $y$ on both sides
 gives
@@ -312,7 +350,7 @@ $$
 Therefore $0_x=1_x\cdot y\le y$, and by antisymmetry we have $y=0_x$.
 
 (8) Using the definition of $+$, we need to show that $x\cdot -(-y\cdot -z)\le -(-(xy)\cdot -(xz))$,
-or equivalently by (cres') $x\cdot-(xy)\cdot-(xz)\le-y\cdot-z$.
+or equivalently by (cr) $x\cdot-(xy)\cdot-(xz)\le-y\cdot-z$.
 
 From $xy\le xy$ we deduce that $x\cdot-(xy) \le -y$, hence left-multiplication by $x$
 and idempotence give $x\cdot-(xy) \le x\cdot -y$. Multiplying on the right by $-(xz)$ produces
@@ -326,15 +364,15 @@ $(-x+-y)(-x+-z)=-x+-y\cdot -z$. Finally replace $x,y,z$ by $-x,-y,-z$ and simpli
 $$
 xy\cdot -(xy)\le xy\cdot -(xy-(-x\cdot -y))\le xy(-x\cdot -y),
 $$
-where the last inequality holds because $xy\cdot-(xy-(-x\cdot -y))\le -x\cdot -y$ by (cres').
+where the last inequality holds because $xy\cdot-(xy-(-x\cdot -y))\le -x\cdot -y$ by (cr).
 Therefore $0_{xy}\le 0_x0_y$.
 
 (10) Assume $x,y\sqsubseteq z$, i.e., $xz=x$ and $yz=y$. Since $z\cdot -z=0_z\le z$ we have
-$xz\cdot -z\le xz$ and hence $x\cdot -z\le x$. From (cres') we obtain $x\cdot -x\le z$.
+$xz\cdot -z\le xz$ and hence $x\cdot -z\le x$. From (cr) we obtain $x\cdot -x\le z$.
 
-Using (cres') with $yz\le yz$ gives $y\cdot -(yz)\le -z$, and using $yz=y$ this simplifies to $y\cdot -y\le -z$ or equivalently $z\le -(y\cdot -y)$. By transitivity we have $0_x\le z\le 1_y$.
+Using (cr) with $yz\le yz$ gives $y\cdot -(yz)\le -z$, and using $yz=y$ this simplifies to $y\cdot -y\le -z$ or equivalently $z\le -(y\cdot -y)$. By transitivity we have $0_x\le z\le 1_y$.
 
-(11) Assume $0_x\le 1_y$, i.e., $x\cdot -x\le -(y\cdot -y)$. By two applications of (cres') this is equivalent to $xy\cdot -y\le x$ and $-x\cdot -y\le -(xy)$. Multiplying by $xy$ on both sides produces $0_x\cdot 0_y\le 0_{xy}$. The reverse inequality follows from (9).
+(11) Assume $0_x\le 1_y$, i.e., $x\cdot -x\le -(y\cdot -y)$. By two applications of (cr) this is equivalent to $xy\cdot -y\le x$ and $-x\cdot -y\le -(xy)$. Multiplying by $xy$ on both sides produces $0_x\cdot 0_y\le 0_{xy}$. The reverse inequality follows from (9).
 \end{proof}
 
 The example in Figure~\ref{cidil} shows that the assumptions in Lemma~\ref{props}(10), (11) are needed. In this algebra, $0_a=1_a=a$, $0_b=1_b=b$, $0_\bot=0_\top=\bot$ and $1_\bot=1_\top=\top$. Hence $0_a\nleq 1_b$ and $0_a\cdot 0_b=ab=\top\ne0_{ab}=0_\top=\bot$.
@@ -355,7 +393,117 @@ in that case we have $wy,wz\sqsubseteq w(y+z)$, hence $wy+wz\sqsubseteq w(y+z)$,
 
 It is an open problem to characterize the posets that are reducts of involutive po-semigroups, even for idempotent and/or finite involutive residuated posets.
 
-Note that any downward-closed set in the multiplicative order of an ipo-semilattice that is a union of Boolean components is again the multiplicative order of some ipo-semilattice. However the diagram in Figure~\ref{cidipo} above shows that the same result does not hold for i$\ell$-semilattices. In this example the multiplicative order $\sqsubseteq$ is a downset of the multiplicative order of $S_3\times S_3$, where $S_3$ is the (unique) 3-element i$\ell$-semilattice (also known as the 3-element Sugihara monoid). However the 8-element example is only an ipo-semilattice rather than an i$e\\$-semilattice.
+Note that any downward-closed set in the multiplicative order of an ipo-semilattice that is a union of Boolean components is again the multiplicative order of some ipo-semilattice. However the diagram in Figure~\ref{cidipo} above shows that the same result does not hold for i$\ell$-semilattices. In this example the multiplicative order $\sqsubseteq$ is a downset of the multiplicative order of $S_3\times S_3$, where $S_3$ is the (unique) 3-element i$\ell$-semilattice (also known as the 3-element Sugihara monoid). However the 8-element example is only an ipo-semilattice rather than an $i\ell$-semilattice.
+
+		%\begin{frame}{irpo-semilattices are unions of Boolean algebras}
+% 		Define $x+y=-(-y\cdot-x)$.
+%         \begin{alertblock}{Theorem (J., Sugimoto 2020). Partition by Boolean Algebras}
+%             Given an irpo-semilattice $A$, the semilattice intervals $(\mathbb B_x,\cdot,+,-,0_x,1_x)$ are Boolean algebras and they partition $A$.
+%         \end{alertblock}
+	\begin{figure}
+		\begin{tikzpicture}
+		\node(9) at (-0.5,-1){};%two element component
+		\node(8) at (.5,-2){};
+		\node(7) at (0,0){};%boolean cube
+		\node(6) at (0,-1){};
+		\node(5) at (-1,-1){};
+		\node(4) at (-1,-2){};
+		\node(3) at (1,-1){};
+		\node(2) at (1,-2){};
+		\node(1) at (0,-2){};
+		\node(0) at (0,-3){};
+		\draw(0)--(1)(0)--(2)--(3)--(7)(0)--(4)--(5)--(7)(1)--(3)(1)--(5)(2)--(6)(4)--(6)(6)--(7)(7)--(9)--(4)(0)--(8)--(3)(8)--(9);
+		\node at (1.5,-3)[n]{$\le$};
+		\end{tikzpicture}
+		\quad
+		\begin{tikzpicture}
+		\node(9) at (0.5,0.5){};%two element component
+		\node(8) at (1.5,-.5){};
+		\draw[ultra thick](8)--(9);
+		\node(7) at (0,0){};%boolean cube
+		\node(6) at (0,-1){};
+		\node(5) at (-1,-1){};
+		\node(4) at (-1,-2){};
+		\node(3) at (1,-1){};
+		\node(2) at (1,-2){};
+		\node(1) at (0,-2){};
+		\node(0) at (0,-3){};
+		\draw[ultra thick] (0)--(1)(0)--(2)--(3)--(7)(0)--(4)--(5)--(7)(1)--(3)(1)--(5)(2)--(6)(4)--(6)(6)--(7);
+		\draw(3)--(8)(7)--(9);
+		\node at (1.5,-3)[n]{$\sqsubseteq$};
+		\end{tikzpicture}
+		\qquad\qquad
+		\begin{tikzpicture}
+		\node(9) at (-0.6,-0.6){};%two element component
+		\node(8) at (.6,-2.4){};
+		\node(7) at (0,0){};%boolean cube
+		\node(6) at (0,-1){};
+		\node(5) at (-1,-1){};
+		\node(4) at (-1,-2){};
+		\node(3) at (1,-1){};
+		\node(2) at (1,-2){};
+		\node(1) at (0,-2){};
+		\node(0) at (0,-3){};
+		\draw(0)--(1)(0)--(8)--(2)--(3)--(7)(0)--(4)--(5)--(9)--(7)(1)--(3)(1)--(5)(2)--(6)(4)--(6)(6)--(7)(8)--(9);
+		\node at (1.5,-3)[n]{$\le$};
+		\end{tikzpicture}
+		\quad
+		\begin{tikzpicture}
+		\node(9) at (0.5,0.5){};%two element component
+		\node(8) at (2,-1){};
+		\draw[ultra thick]
+		(8)--(9);
+		\node(7) at (0,0){};%boolean cube
+		\node(6) at (0,-1){};
+		\node(5) at (-1,-1){};
+		\node(4) at (-1,-2){};
+		\node(3) at (1,-1){};
+		\node(2) at (1,-2){};
+		\node(1) at (0,-2){};
+		\node(0) at (0,-3){};
+		\draw[ultra thick] (0)--(1)(0)--(2)--(3)--(7)(0)--(4)--(5)--(7)(1)--(3)(1)--(5)(2)--(6)(4)--(6)(6)--(7);
+		\draw(2)--(8)(7)--(9);
+		\node at (1.5,-3)[n]{$\sqsubseteq$};
+		\end{tikzpicture}
+		\caption{(Right) irpo-semilattice with identity that is not an ir$\ell$-semilattice.}
+		\label{M10}
+	\end{figure}
+
+	The Boolean components are denoted by thick lines and are connected by homomorphisms (thin lines). For unital $i\ell$-semilattices the above theorem is due to 
+	\cite{JTV2020}.%[J., Tuyt, Valota 2020].
+
+\begin{lemma}
+Let $\m A$ be a unital irpo-semilattice. If $0_x=1_x$ then $x=1$, hence all Boolean components except possibly the top one are nontrivial.
+\end{lemma}
+
+Any involutive residuated lattice is called \textbf{odd} if it satisfies the identity $-1 = 1$ (i.e., $0=1$).
+
+The terminology originates from finite Sugihara monoids since a finite Sugihara monoid is odd if and only if it has odd cardinality.
+
+The lemma above shows that the same result is true much more generally for finite unital irpo-semilattices.
+
+\begin{theorem}
+A finite unital irpo-semilattice $\m A$ is odd if and only if $|A|$ is odd.
+
+If $|A|$ is even then $\m A$ is subdirectly irreducible if and only if $|\mathbb B_1|=2$.
+\end{theorem}
+
+%\begin{frame}{Unital sub-ir$\ell$-semilattices}
+\begin{theorem} 
+	Let $\mathbf{A}$ be an ir$\ell$-semilattice. Then for every $x \in A$ the multiplicative downset of $1_x$ is a unital sub-ir$\ell$-semilattice.
+\end{theorem}
+\begin{proof}
+		Let $\mathbf A_x$ denote the multiplicative downset of $1_x$. If $y\cdot 1_x=y$ and $z\cdot 1_x=z$ then $(y\vee z) \cdot 1_x = (y\cdot 1_x) \vee (z \cdot 1_x) = y \vee z$ since $\cdot$ distributes over $\vee$. Therefore $\mathbf A_x$ is closed under join.
+		
+		Each Boolean component is closed under $-$, so it is clear that $\mathbf A_x$ is closed under $-$.
+		
+		By DeMorgan laws, closure under $-$ and $\vee$ guarantees closure under $\wedge$.
+		
+	Therefore $\mathbf A_x$ is a sub-ir$\ell$-semilattice.
+\end{proof}
+%\end{frame}
+
+
 
 \section{Semilattice direct systems and P\l onka sums}
 In this section we prove that the multiplicative order $\sqsubseteq$ of a finite ipo-semilattice is a
@@ -395,11 +543,16 @@ defined by $h_{ij}(x)=x\cdot j$,
 \end{enumerate}
 \end{theorem}
 \begin{proof} (1) The set $I$ is closed under the semilattice operation $\cdot$ of $\m A$ by Lemma~\ref{props}(6). The maps $h_{ij}$ satisfy
-$h_{ij}(xy)=xyj=xjyj=h_{ij}(x)h_{ij}(y)$ since multiplication is commutative and idempotent,
-and $h_{ij}(x+y)=(x+y)j\le xj+yj=h_{ij}(x)+h_{ij}(y)$ by Lemma~\ref{props}(8). However they should be distributive lattice homomorphisms SO HERE IS STILL A GAP. Finally for $x\in\mathbb B_i$, $h_{ii}(x)=xi=x1_x=x$, and if $i\ge j\ge k$ then $h_{jk}(h_{ij}(x))=xjk=xk=h_{ik}(x)$. Since
+$h_{ij}(xy)=xyj=xjyj=h_{ij}(x)h_{ij}(y)$ since multiplication is commutative and idempotent.
+In the Boolean algebra, $+$ coincides with $\vee$
+and $h_{ij}(x\vee y)=(x\vee y)j= xj\vee yj=h_{ij}(x)\vee h_{ij}(y)$ by Lemma~\ref{props}(8). 
+
+Finally for $x\in\mathbb B_i$, $h_{ii}(x)=xi=x1_x=x$, and if $i\ge j\ge k$ then $h_{jk}(h_{ij}(x))=xjk=xk=h_{ik}(x)$. Since
  $1_i=i$ and $1_j=j$ it follows that $i\ge j$ implies $h_{ij}(1_i)=ij=j=1_j$.
 
-(2), (3) TBD
+(2) TBD
+
+(3) TBD
 \end{proof}
 
 The representation of ipo-semilattices by certain P\l onka sums of Boolean algebras gives a good structural description of the multiplication operation of the ipo-semilattice. Reconstructing the partial order $\le$ is not so simple, but it is possible.
@@ -462,6 +615,89 @@ This operation is clearly idempotent and commutative. Checking associativity con
 (x\cdot^\m Cy)\cdot^\m Cz=h(xy)z=h(x)(h(y)z)=x\cdot^\m C(y\cdot^\m Cz)\\
 \]
 We also have an involution on $C$ given by the union of $-^\m A$ and $-^\m B$.
+
+%\begin{frame}{Dual Representation by Partial Functions Between Sets}
+The systems of partial maps that arise from ipo-semilattices have an additional property.
+
+The system $\m X$ is \textbf{covering} if for all $i,j\le k$ with $i\cdot j=\ell$, $\text{dom}(f_{\ell,i})\cup\text{dom}(f_{\ell,j})=\mathbb B_\ell$.
+
+    \begin{corollary}
+If $\m X$ is the sd-system of partial maps of an irpo-semilattice then
+$\m X$ is covering.
+    \end{corollary}
+\begin{figure}
+\begin{center}\scriptsize
+\begin{tikzpicture}[scale=0.75]
+\draw[very thick](0,0)--(-1,1)--(0,2)--(1,1)--(0,0)(-2,2)--(-1,3)(2,2)--(1,3)
+(0,-1)--(-1,0)--(-1,1)(0,-1)--(1,0)--(1,1)(0,-1)--(0,0)(-1,0)--(0,1)--(1,0)(0,1)--(0,2);
+\draw(0,2)--(1,1)node{}--(0,0)node{}--(-1,1)node{}--(0,2)node{}--(1,3)node[label=right:$1_y$]{}--(0,4)node[label=above:{$0=1$}]{}--(-1,3)node[label=left:$1_x\,$]{}--(0,2)(-1,1)--(-2,2)node[label=left:$0_x$]{}--(-1,3)(1,1)--(2,2)node[label=right:$0_y$]{}--(1,3)(0,-1)node{}(-1,0)node{}(1,0)node{}(0,1)node{};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale=0.85]
+\node(7) at (0,4)[n]{$\emptyset$};
+\node(5) at (-1.5,2.5){};
+\node(3) at (1.5,2.5){};
+\node(2) at (.8,1){};
+\node(1) at (0,1){};
+\node(0) at (-.8,1){};
+\draw[dotted](5) edge (7);
+\draw[dotted](3) edge (7);
+\draw(2) edge (3);
+\draw(0) edge (5);
+\draw (0,1) ellipse [x radius=35pt, y radius=13pt];
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\textbf{Proof.} Use Lemma 4 (10) and (11): $x,y\sqsubseteq z\implies 0_x\cdot 0_y=0_{xy}$.
+%\end{frame}
+
+%\begin{frame}
+\textbf{An algorithm for constructing $\le$ from $\sqsubseteq$.}
+If we assume that the multiplicative order and the additive order agree on the Boolean 
+determines the additive order and vice versa.
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\draw (0,0)..controls(-2,2)and(-2,4)..(0,6)..controls(2,4)and(2,2)..(0,0)
+(2,5)..controls(.66,6.33)and(.66,7.66)..(2,9)..controls(3.33,7.66)and(3.33,6.33)..(2,5)
+(-2,5)..controls(-.66,6.33)and(-.66,7.66)..(-2,9)..controls(-3.33,7.66)and(-3.33,6.33)..(-2,5)
+(0,9)..controls(-.66,9.66)and(-.66,10.33)..(0,11)..controls(.66,10.33)and(.66,9.66)..(0,9)
+(2,5)--(1.3,4.05)..controls(0.25,4.5)and(0,5)..
+(0,6)--(1,7)..controls(1.75,6.5)and(2,6)..(2,5)
+(-2,5)--(-1.3,4.05)..controls(-0.25,4.5)and(-0,5)..
+(0,6)--(-1,7)..controls(-1.75,6.5)and(-2,6)..(-2,5)
+(2,9)..controls(2,8.5)and(1.8,8.25)..(1.25,8)--
+(0,9)..controls(0,9.5)and(0.25,9.75)..(.5,10)--(2,9)(-2,9)..controls(-2,8.5)and(-1.8,8.25)..(-1.25,8)--
+(0,9)..controls(0,9.5)and(-0.25,9.75)..(-.5,10)--(-2,9);
+\node at (0,-1)[n]{$\sqsubseteq$};
+\node at (2.4,3.9)[n]{$-a_k$};
+\node at (-2.1,2)[n]{$a_k$};
+\node at (1.5,1.5)[n,label=right:$\mathbb B_\ell$]{};
+\node at (3.5,7)[n,label=right:$\mathbb B_k$]{};
+\node at (-3.5,7)[n,label=left:$\mathbb B_j$]{};
+\node at (1,10.5)[n,label=right:$\mathbb B_i$]{};
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale=1]
+\draw (0,0)..controls(-2,2)and(-2,4)..(0,6)..controls(2,4)and(2,2)..(0,0)
+(3.3,1)..controls(1.96,2.33)and(1.96,3.66)..(3.3,5)..controls(4.63,3.66)and(4.63,2.33)..(3.3,1)
+(6,1)..controls(4.66,2.33)and(4.66,3.66)..(6,5)..controls(7.33,3.66)and(7.33,2.33)..(6,1)
+(8,2)..controls(7.33,2.66)and(7.33,3.33)..(8,4)..controls(8.66,3.33)and(8.66,2.66)..(8,2)
+%(2,5)--(1.25,4)..controls(0.25,4.5)and(0,5)..(0,6)--(1,7)
+%(-2,5)--(-1.25,4)..controls(-0.25,4.5)and(-0,5)..(0,6)--(-1,7)
+;
+\node at (4.5,-1)[n]{$\le$};
+\node at (0,-1)[n]{$\mathbb B_\ell$};
+\node at (3.3,0)[n]{$\mathbb B_k$};
+\node at (6,0)[n]{$\mathbb B_j$};
+\node at (8,1)[n]{$\mathbb B_i$};
+\end{tikzpicture}
+\end{center}
+\end{figure}
+%\end{frame}
+
+
 
 
 %We begin with an example that shows how a pair of Boolean algebras $A,B$ with designated elements $a\in A$ and
@@ -686,18 +922,95 @@ We also have an eight element i$\ell$-semilattice with both its lattice and mutl
 \clearpage
 \begin{thebibliography}{9}
 \bibitem{BLP2019}
-Bonzio, S., Loi, A., Peruzzi, L.: A duality for involutive bisemilattices, Studia Logica, (2019) 107: 423--444.
+Bonzio, S., Loi, A., Peruzzi, L.: 
+A duality for involutive bisemilattices, Studia Logica, (2019) 107: 423--444.
 
 \bibitem{GJKO2007}
-Galatos, N., Jipsen, P., Kowalski, T., Ono, H.: ``Residuated
-lattices: an algebraic glimpse at substructural logics'', Studies
-in Logic and the Foundations of Mathematics, Vol. 151, Elsevier, 2007.
+Galatos, N., Jipsen, P., Kowalski, T., Ono, H.: 
+``Residuated lattices: an algebraic glimpse at substructural logics'', 
+Studies in Logic and the Foundations of Mathematics, Vol. 151, Elsevier, 2007.
 
+\bibitem{Je2020} 
+Jenei, S.:
+The Hahn embedding theorem for a class of residuated semigroups.
+{\em Studia Logica}, 108: 1161–1206, 2020.
+
+\bibitem{Je2020a} 
+Jenei, S.:
+Group-representation for even and odd involutive commutative residuated chains.
+{\em preprint}, \url{https://arxiv.org/abs/1910.01404}, 2020.
 
 \bibitem{JTV2020}
-Jipsen, P., Tuyt, O., Valota, D.: Structural characterization of commutative idempotent involutive residuated lattices, preprint, 2020.
+Jipsen, P., Tuyt, O., Valota, D.: 
+The structure of finite commutative idempotent involutive residuated lattices, 
+Algebra Universalis, \textbf{82}, 57 (2021). 
+\url{https://doi.org/10.1007/s00012-021-00751-4}
 
 \bibitem{McC2010}
-McCune, W.: Prover9 and Mace4. \url{www.cs.unm.edu/~mccune/prover9/}, 2005–2010.
+McCune, W.: 
+Prover9 and Mace4. \url{www.cs.unm.edu/~mccune/prover9/}, 2005–2010.
 \end{thebibliography}
+
+\vskip 1cm
+\scriptsize
+\begin{tikzpicture}[xscale=.3,yscale=.65]
+\node(T)at(0,20)[label=above:$\top$]{};
+\node(P0)at(-6,19)[label=above:$P_0$]{}edge(T);
+\node(P1)at(5,19)[label=above:$P_1$]{}edge(T);
+\node(P)at(-1,18)[label=above:$P$]{}edge(P0)edge(P1);
+\node(T02)at(-18,17)[label=above:$T_0^2$]{}edge(P0);
+\node(T03)at(-24,16)[label=above:$T_0^3$]{}edge(T02);
+\node(T0i)at(-30,15)[label=above:$T_0^\infty$]{}edge[dotted](T03);
+\node(PT02)at(-13,16)[label=above:$PT_0^2$]{}edge(T02)edge(P);
+\node(PT03)at(-19,15)[label=above:$PT_0^3$]{}edge(T03)edge(PT02);
+\node(PT0i)at(-25,14)[label=above:$PT_0^\infty$]{}edge(T0i)edge[dotted](PT03);
+\node(T12)at(15,17)[label=above:$T_1^2$]{}edge(P1);
+\node(T13)at(20,16)[label=above:$T_1^3$]{}edge(T12);
+\node(T1i)at(25,15)[label=above:$T_1^\infty$]{}edge[dotted](T13);
+\node(PT12)at(9,16)[label=above:$PT_1^2$]{}edge(T12)edge(P);
+\node(PT13)at(14,15)[label=above:$PT_1^3$]{}edge(T13)edge(PT12);
+\node(PT1i)at(19,14)[label=above:$PT_1^\infty$]{}edge(T1i)edge[dotted](PT13);
+
+\node(M)at(0,17)[label=below:$M$]{}edge(T);
+\node(MP0)at(-6,16)[label=below:$M\!P_0$]{}edge(M)edge(P0);
+\node(MP1)at(5,16)[label=below:$M\!P_1$]{}edge(M)edge(P1);
+\node(MP)at(-1,15)[label=below:$M\!P$]{}edge(MP0)edge(MP1)edge(P);
+\node(MT02)at(-18,14)[label=below:$MT_0^2$]{}edge(MP0)edge(T02);
+\node(MT03)at(-24,13)[label=below:$MT_0^3$]{}edge(MT02)edge(T03);
+\node(MT0i)at(-30,12)[label=below:$MT_0^\infty$]{}edge[dotted](MT03)edge(T0i);
+\node(MPT02)at(-13,13)[label=below:$M\!PT_0^2$]{}edge(MT02)edge(MP)edge(PT02);
+\node(MPT03)at(-19,12)[label=below:$M\!PT_0^3$]{}edge(MT03)edge(MPT02)edge(PT03);
+\node(MPT0i)at(-25,11)[label=below:$M\!PT_0^\infty$]{}edge(MT0i)edge[dotted](MPT03)edge(PT0i);
+\node(MT12)at(15,14)[label=below:$MT_1^2$]{}edge(MP1)edge(T12);
+\node(MT13)at(20,13)[label=below:$MT_1^3$]{}edge(MT12)edge(T13);
+\node(MT1i)at(25,12)[label=below:$MT_1^\infty$]{}edge[dotted](MT13)edge(T1i);
+\node(MPT12)at(9,13)[label=below:$M\!PT_1^2$]{}edge(MT12)edge(MP)edge(PT12);
+\node(MPT13)at(14,12)[label=below:$M\!PT_1^3$]{}edge(MT13)edge(MPT12)edge(PT13);
+\node(MPT1i)at(19,11)[label=below:$M\!PT_1^\infty$]{}edge(MT1i)edge[dotted](MPT13)edge(PT1i);
+
+\node(Mt)at(-24,7)[label=below:$\wedge$]{}edge(M);
+\node(MtP0)at(-30,6)[label=below:$\wedge P_0$]{}edge(Mt)edge(MT0i);
+\node(MtP1)at(-19,6)[label=below:$\wedge P_1$]{}edge(Mt)edge(MP1);
+\node(MtP)at(-25,5)[label=below:$\wedge P$]{}edge(MtP0)edge(MtP1)edge(MPT0i);
+\node(Jn)at(20,7)[label=below:$\vee$]{}edge(M);
+\node(JnP0)at(14,6)[label=below:$\vee P_0$]{}edge(Jn)edge(MP0);
+\node(JnP1)at(25,6)[label=below:$\vee P_1$]{}edge(Jn)edge(MT1i);
+\node(JnP)at(19,5)[label=below:$\vee P$]{}edge(JnP0)edge(JnP1)edge(MPT1i);
+\node(D)at(-1,13)[label=right:$D$]{}edge(T);
+\node(DP)at(-2.5,12)[label=left:$DP$]{}edge(D)edge(P);
+\node(DM)at(-4,11)[label=left:$DM$]{}edge(MPT02)edge(DP)edge(MPT12);
+\node(A)at(1,10)[label=right:$A$]{}edge(T);
+\node(AP0)at(-8,9)[label=left:$AP_0$]{}edge(A)edge(P0);
+\node(AP1)at(7,9)[label=right:$AP_1$]{}edge(A)edge(P1);
+\node(AD)at(-0.5,9)[label=left:$AD$]{}edge(A)edge(D);
+\node(AP)at(-2,8)[label=left:$AP$]{}edge(AP0)edge(DP)edge(AP1)edge(AD);
+\node(U)at(1,7)[label=right:$U$]{}edge(A);
+\node(UD)at(-0.5,6)[label=left:$U\!D$]{}edge(U)edge(AD);
+\node(UM)at(1,5)[label=below:$U\!M$]{}edge(Mt)edge(U)edge(Jn);
+\node(UP0)at(-6,4)[label=below:$U\!P_0$]{}edge(MtP0)edge(AP0)edge(UM)edge(JnP0);
+\node(UP1)at(5,4)[label=below:$U\!P_1$]{}edge(MtP1)edge(UM)edge(AP1)edge(JnP1);
+\node(B)at(-2,3)[label=below:$\bot$]{}edge(MtP)edge(UP0)edge(DM)edge(AP)edge(UD)edge(UP1)edge(JnP);
+
+\end{tikzpicture}
+
 \end{document}
